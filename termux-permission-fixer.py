@@ -27,11 +27,11 @@ def tmp_file_info_finder():
     return file_info_getter.stdout.read()
 
 
-script_path = 'termux_path/files/usr/bin/termux-fix-permissions'
+script_path = f'{termux_path}/files/usr/bin/termux-fix-permissions'
 writer = open(script_path, 'w')
 uname = getuid()
 fix_user_part = f'''#! /system/bin/sh
-su -c chown -R {uname}:{uname} termux_path/'''
+su -c chown -R {uname}:{uname} {termux_path}/'''
 restorecoc_command = f'\nsu -c restorecon -RF {termux_path}'
 if restorecon_checker():
     writer.write(fix_user_part+restorecoc_command)
